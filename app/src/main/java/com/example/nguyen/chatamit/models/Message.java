@@ -2,7 +2,7 @@ package com.example.nguyen.chatamit.models;
 
 public class Message {
     private String content;
-    private int idUser;
+    private User user;
 
     public String getContent() {
         return content;
@@ -12,11 +12,11 @@ public class Message {
         this.content = content;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

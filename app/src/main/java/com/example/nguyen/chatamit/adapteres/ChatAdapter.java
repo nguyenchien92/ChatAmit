@@ -10,12 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nguyen.chatamit.R;
+import com.example.nguyen.chatamit.models.Message;
 
 import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder>{
     private Context context;
-    private List<String> mStrings;
+    private List<Message> mMessages;
 
     @NonNull
     @Override
@@ -29,14 +30,17 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ChatHolder holder, int position) {
-        String mString = mStrings.get(position);
-        holder.tvUser.setText(mString);
-        holder.tvOtherUser.setText("Not event");
+        Message mess = mMessages.get(position);
+
+        //chua hoan thien viec thiet lap.....
+
+        holder.tvUser.setText(mess.getContent());
+        holder.tvOtherUser.setText("Not event....");
     }
 
     @Override
     public int getItemCount() {
-        return mStrings.size();
+        return mMessages.size();
     }
 
     public class ChatHolder extends RecyclerView.ViewHolder

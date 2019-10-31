@@ -114,7 +114,7 @@ public class ChatScreenFrag extends Fragment {
 
 //        take data image
 
-
+    
 
     }
 

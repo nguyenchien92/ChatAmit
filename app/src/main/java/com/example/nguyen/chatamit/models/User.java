@@ -6,6 +6,15 @@ public class User implements Serializable {
     private String name, time, description;
     private int imageUser;
     private int dataType;
+    private int idUser;
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
 
     public int getDataType() {
         return dataType;
