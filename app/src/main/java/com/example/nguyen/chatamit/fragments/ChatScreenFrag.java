@@ -112,6 +112,7 @@ public class ChatScreenFrag extends Fragment {
 
         Sticker image = mStickers.get(position);
 
+//        take data image
 
 
 

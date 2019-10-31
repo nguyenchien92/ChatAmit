@@ -45,5 +45,5 @@
         android:backgroundTint="#6552E9"
         android:gravity="center"
         android:text="This is mess"
-        android:textColorHint="#FFFFFF" />
+        android:textColor="#FFFFFF" />
 </RelativeLayout>
