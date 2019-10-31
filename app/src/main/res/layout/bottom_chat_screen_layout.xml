@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/ed_send_screen"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_sticker_screen"
+            android:background="@drawable/image_mess_shape"
+            android:backgroundTint="#E4E1E1"
+            android:hint="Aa"
+            android:paddingLeft="10dp" />
+
+        <ImageView
+            android:id="@+id/iv_sticker_screen"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_sticker" />
+
+        <ImageView
+            android:id="@+id/iv_send_chat_screen"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/ic_send" />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_sticker_screen"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:overScrollMode="ifContentScrolls" />
+
+
+</LinearLayout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="7dp">
+
+        <ImageView
+            android:id="@+id/iv_back_screen"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Create new group"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/button_login_shape"
+            android:gravity="center"
+            android:text="Done"
+            android:textColor="@color/colorWhite" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relative_search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#D1CDCD"
+        android:padding="7dp">
+
+        <ImageView
+            android:id="@+id/iv_icon_search"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_search" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@id/iv_icon_search"
+            android:gravity="center_vertical"
+            android:text="Search people and bots" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_search_view_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#D1CDCD"
+        android:padding="7dp">
+
+        <EditText
+            android:id="@+id/edit_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search"
+            android:background="@null"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:id="@+id/tv_close"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:background="@drawable/ic_delete" />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_suggest_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="7dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D1CDCD" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_display_list_people"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="7dp" />
+
+</LinearLayout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+        <com.synnapps.carouselview.CarouselView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:fillColor="#667F9BE2"
+            app:pageColor="#00000000"
+            app:radius="3dp"
+            app:slideInterval="3000"
+            app:strokeColor="#667F9BE2"
+            app:strokeWidth="1dp"
+            android:id="@+id/carouse_view"/>
+    </FrameLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/bt_login"
+            android:layout_width="200sp"
+            android:layout_height="50sp"
+            android:background="@drawable/button_login_shape"
+            android:text="LOGIN"
+            android:textColor="#FFFFFF"/>
+
+        <Button
+            android:id="@+id/bt_register"
+            android:layout_width="200sp"
+            android:layout_height="50sp"
+            android:background="@drawable/button_register_shape"
+            android:text="REGISTER"
+            android:layout_marginTop="20sp"
+            android:textColor="#0F0F0F"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:gravity="center">
+        <TextView
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:text="Tiếng Việt"
+            android:id="@+id/tv_vie"
+            android:textColor="#0F0F0F"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:text="English"
+            android:id="@+id/tv_eng"
+            android:textColor="#0F0F0F"
+            android:gravity="center"/>
+    </LinearLayout>
+
+</LinearLayout>

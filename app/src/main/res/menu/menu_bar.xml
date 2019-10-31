@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_message"
+        android:checked="true"
+        android:icon="@drawable/ic_mess"
+        android:title="@string/item_message" />
+    <item
+        android:id="@+id/action_contact"
+        android:checked="true"
+        android:icon="@drawable/ic_call"
+        android:title="@string/item_contact" />
+    <item
+        android:id="@+id/action_more"
+        android:checked="true"
+        android:icon="@drawable/ic_more"
+        android:title="@string/item_more" />
+    <item
+        android:id="@+id/action_create_group"
+        android:checked="true"
+        android:icon="@drawable/ic_edit"
+        android:title="Create Group" />
+    <item
+        android:id="@+id/action_new_group_conversation"
+        android:checked="true"
+        android:icon="@drawable/ic_user_group_gray"
+        android:title="Create new group conversation" />
+</menu>
