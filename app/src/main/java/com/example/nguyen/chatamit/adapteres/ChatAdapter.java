@@ -1,9 +1,13 @@
 package com.example.nguyen.chatamit.adapteres;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.text.SpannableStringBuilder;
+import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,9 +18,14 @@ import com.example.nguyen.chatamit.models.Message;
 
 import java.util.List;
 
-public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder>{
+public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder> {
     private Context context;
     private List<Message> mMessages;
+
+    public ChatAdapter(Context context, List<Message> mMessages) {
+        this.context = context;
+        this.mMessages = mMessages;
+    }
 
     @NonNull
     @Override
@@ -30,12 +39,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ChatHolder holder, int position) {
-        Message mess = mMessages.get(position);
 
-        //chua hoan thien viec thiet lap.....
+        holder.setView(position, context);
 
-        holder.tvUser.setText(mess.getContent());
-        holder.tvOtherUser.setText("Not event....");
+
     }
 
     @Override
@@ -43,10 +50,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder>{
         return mMessages.size();
     }
 
-    public class ChatHolder extends RecyclerView.ViewHolder
-    {
+    public class ChatHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvOtherUser,tvUser;
+        public TextView tvOtherUser, tvUser;
+        public ImageView ivAnotherUser,ivUser;
 
         public ChatHolder(@NonNull View itemView) {
             super(itemView);
@@ -54,6 +61,37 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder>{
 
             tvOtherUser = itemView.findViewById(R.id.tv_other_user);
             tvUser = itemView.findViewById(R.id.tv_user);
+
+            ivAnotherUser = itemView.findViewById(R.id.iv_another_user);
+            ivUser = itemView.findViewById(R.id.iv_user);
+        }
+
+        public void setView(int position, Context context) {
+            Message message = mMessages.get(position);
+
+            int resId = context.getResources()
+                    .getIdentifier(message.getContent(), "drawable", context.getPackageName());
+
+            if(message.){}
+
+
+
+//            mTextView01.setCompoundDrawablesWithIntrinsicBounds(null,
+//                    getResources().getDrawable(R.drawable.ic_launcher, null), null, null);
+
+//            tvUser.setCompoundDrawables(null,null,null,context
+//                    .getResources().getDrawable(resId,null));
+//            tvOtherUser.setVisibility(View.GONE);
         }
     }
 }
+//        int resId = getContext()
+//                .getResources()
+//                .getIdentifier(mPath, "drawable", getContext().getPackageName());
+//
+//
+//        SpannableStringBuilder builderContentImage = new SpannableStringBuilder();
+//
+//        ImageSpan span = new ImageSpan(getContext(), resId);
+//
+//        builderContentImage.append("", span, 0);

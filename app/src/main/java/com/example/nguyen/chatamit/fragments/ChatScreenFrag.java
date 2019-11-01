@@ -2,6 +2,8 @@ package com.example.nguyen.chatamit.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nguyen.chatamit.MainActivity;
 import com.example.nguyen.chatamit.R;
+import com.example.nguyen.chatamit.adapteres.ChatAdapter;
 import com.example.nguyen.chatamit.adapteres.StickerAdapter;
+import com.example.nguyen.chatamit.models.Message;
 import com.example.nguyen.chatamit.models.Sticker;
 import com.example.nguyen.chatamit.util.NavigationTo;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -34,11 +38,13 @@ public class ChatScreenFrag extends Fragment {
 
     private View rootView, viewBottom;
     private ImageView ivBack, ivSticker, ivSend;
-    private RecyclerView rvSticker,rvDisplayContentChat;
+    private RecyclerView rvSticker, rvDisplayContentChat;
     private List<Sticker> mStickers = new ArrayList<>();
     private StickerAdapter adapter;
     private boolean isState = true;
     private EditText edSend;
+    private ChatAdapter chatAdapter;
+    private List<Message> messageList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.frag_chat_screen_layout, container, false);
@@ -112,9 +118,23 @@ public class ChatScreenFrag extends Fragment {
 
         Sticker image = mStickers.get(position);
 
-//        take data image
+        String[] path = image.getImage().split("\\.");
 
-    
+        String mPath = path[0];
+
+
+
+//not set data for messageList
+
+        Message message = new Message();
+        message.setContent(mPath);
+
+        if(messageList.isEmpty())
+        {
+            messageList.add(message);
+        }
+
+
 
     }
 
@@ -134,6 +154,17 @@ public class ChatScreenFrag extends Fragment {
         rvSticker = viewBottom.findViewById(R.id.rv_sticker_screen);
         edSend = viewBottom.findViewById(R.id.ed_send_screen);
         rvDisplayContentChat = rootView.findViewById(R.id.display_content_chat);
+
+        chatAdapter = new ChatAdapter(getContext(), messageList);
+        rvDisplayContentChat.setAdapter(chatAdapter);
+
+
+        LinearLayoutManager mn = new LinearLayoutManager(getContext());
+        mn.setReverseLayout(true);
+
+        rvDisplayContentChat.setLayoutManager(mn);
+
+
 
         if (getActivity() instanceof MainActivity) {
             BottomNavigationView bottom = getActivity().findViewById(R.id.bottom_navigation_bar);
@@ -161,3 +192,9 @@ public class ChatScreenFrag extends Fragment {
         }
     }
 }
+//    SpannableStringBuilder builder = new SpannableStringBuilder();
+//    builder.append("My string. I ")
+//            .append(" ", new ImageSpan(getActivity(), R.drawable.ic_action_heart), 0)
+//            .append(" Cree by Dexode");
+//
+//            textView.setText(builder);

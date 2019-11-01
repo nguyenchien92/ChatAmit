@@ -33,14 +33,19 @@
             android:textColor="#161515"
             android:textSize="20sp"
             android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E4E1E1"
+            android:layout_below="@id/tv_name_user_screen_chat"/>
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/display_content_chat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
-        android:padding="10dp"
-        android:id="@+id/display_content_chat"/>
+        android:padding="10dp"/>
 
     <include layout="@layout/bottom_chat_screen_layout"
         android:layout_height="wrap_content"

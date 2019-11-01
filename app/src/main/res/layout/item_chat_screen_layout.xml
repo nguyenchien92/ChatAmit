@@ -1,49 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_icon_mess"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:background="@drawable/shape_circle"
+            android:gravity="center"
+            android:text="C" />
+
+        <TextView
+            android:id="@+id/tv_title_mess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/tv_icon_mess"
+            android:gravity="center"
+            android:hint="Name other user"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_other_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title_mess"
+            android:layout_marginRight="100dp"
+            android:layout_toRightOf="@id/tv_icon_mess"
+            android:background="@drawable/mess_shape"
+            android:backgroundTint="@color/colorGray"
+            android:gravity="center"
+            android:text="MXH, thậm chí nhiều lần tự hỏi người ta  gương mặt đơn giản chỉ là sản phẩm của PTTM và thêm nữa là sản phẩm của... photoshop." />
+
+        <ImageView
+            android:id="@+id/iv_another_user"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/tv_other_user"
+            android:layout_marginTop="0dp"
+            android:src="@drawable/cuppy_angry"
+            android:layout_toRightOf="@id/tv_icon_mess"/>
+    </RelativeLayout>
 
     <TextView
-        android:id="@+id/tv_icon_mess"
-        android:layout_width="37dp"
-        android:layout_height="37dp"
-        android:background="@drawable/shape_circle"
-        android:gravity="center"
-        android:text="C" />
-
-    <TextView
-        android:id="@+id/tv_title_mess"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Name other user"
-        android:textSize="15sp"
-        android:gravity="center"
-        android:layout_toRightOf="@id/tv_icon_mess"
-        android:layout_marginLeft="5dp"/>
-
-    <TextView
-        android:id="@+id/tv_other_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/mess_shape"
-        android:gravity="center"
-        android:text="MXH, thậm chí nhiều lần tự hỏi người ta ăn gì mà đẹp thế hay vì sao ảnh ọt của người ta lúc nào cũng lung linh thế. Vậy nhưng thực tế chứng minh, không phải tất cả trong số đó đều đẹp bẩm sinh đâu nhé mà đôi khi, nhiều gương mặt đơn giản chỉ là sản phẩm của PTTM và thêm nữa là sản phẩm của... photoshop."
-        android:layout_toRightOf="@id/tv_icon_mess"
-        android:layout_marginLeft="5dp"
-        android:layout_below="@id/tv_title_mess"
-        android:backgroundTint="@color/colorGray"/>
-
-    <TextView
+        android:layout_marginTop="50dp"
         android:id="@+id/tv_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
         android:background="@drawable/mess_shape"
         android:backgroundTint="#6552E9"
+        android:layout_marginBottom="5dp"
         android:gravity="center"
         android:text="This is mess"
-        android:textColor="#FFFFFF" />
-</RelativeLayout>
+        android:textColor="#FFFFFF"
+        android:layout_gravity="right"/>
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="0dp"
+        android:src="@drawable/cuppy_angry"
+        android:layout_gravity="right"
+        android:id="@+id/iv_user"/>
+</LinearLayout>
