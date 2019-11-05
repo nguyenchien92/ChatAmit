@@ -187,7 +187,7 @@ public class ChatScreenFrag extends BaseFragment {
     }
 
     @Override
-    public void onBackPressed() {
+    public boolean onBackPressed() {
 
         FragmentManager mn = getFragmentManager();
 
@@ -196,9 +196,10 @@ public class ChatScreenFrag extends BaseFragment {
         if(mn.getBackStackEntryCount() > 0)
         {
             mn.popBackStack(current.getClass().getSimpleName(),0);
+            return true;
 
         }else {
-            super.onBackPressed();
+            return false;
         }
 
     }

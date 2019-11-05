@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment;
 
 public class BaseFragment extends Fragment {
 
-    public void onBackPressed(){
-
+    public boolean onBackPressed(){
+        return false;
     }
 }
