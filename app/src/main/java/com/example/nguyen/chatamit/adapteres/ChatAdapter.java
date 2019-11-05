@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nguyen.chatamit.R;
 import com.example.nguyen.chatamit.models.Message;
+import com.example.nguyen.chatamit.models.Sticker;
 
 import java.util.List;
 
@@ -25,6 +26,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder> {
     public ChatAdapter(Context context, List<Message> mMessages) {
         this.context = context;
         this.mMessages = mMessages;
+    }
+
+    public List<Message> getmMessages() {
+        return mMessages;
+    }
+
+    public void setmMessages(List<Message> m) {
+        this.mMessages = m;
     }
 
     @NonNull
@@ -40,9 +49,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder> {
     @Override
     public void onBindViewHolder(@NonNull ChatHolder holder, int position) {
 
-        holder.setView(position, context);
-
-
+        holder.setView(position);
     }
 
     @Override
@@ -53,7 +60,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder> {
     public class ChatHolder extends RecyclerView.ViewHolder {
 
         public TextView tvOtherUser, tvUser;
-        public ImageView ivAnotherUser,ivUser;
+        public ImageView ivAnotherUser, ivUser;
 
         public ChatHolder(@NonNull View itemView) {
             super(itemView);
@@ -66,32 +73,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder> {
             ivUser = itemView.findViewById(R.id.iv_user);
         }
 
-        public void setView(int position, Context context) {
+        public void setView(int position) {
             Message message = mMessages.get(position);
 
-            int resId = context.getResources()
-                    .getIdentifier(message.getContent(), "drawable", context.getPackageName());
+            Sticker mSticker = message.getmSticker();
+            String resIdSticker = mSticker.getImage();
 
-            if(message.){}
-
-
-
-//            mTextView01.setCompoundDrawablesWithIntrinsicBounds(null,
-//                    getResources().getDrawable(R.drawable.ic_launcher, null), null, null);
-
-//            tvUser.setCompoundDrawables(null,null,null,context
-//                    .getResources().getDrawable(resId,null));
-//            tvOtherUser.setVisibility(View.GONE);
+            if (!resIdSticker.isEmpty()) {
+                ivUser.setImageResource(Integer.parseInt(resIdSticker));
+            }
         }
     }
 }
-//        int resId = getContext()
-//                .getResources()
-//                .getIdentifier(mPath, "drawable", getContext().getPackageName());
-//
-//
-//        SpannableStringBuilder builderContentImage = new SpannableStringBuilder();
-//
-//        ImageSpan span = new ImageSpan(getContext(), resId);
-//
-//        builderContentImage.append("", span, 0);

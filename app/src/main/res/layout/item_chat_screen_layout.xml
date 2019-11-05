@@ -65,7 +65,6 @@
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="0dp"
         android:src="@drawable/cuppy_angry"
         android:layout_gravity="right"
         android:id="@+id/iv_user"/>

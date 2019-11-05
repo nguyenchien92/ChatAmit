@@ -1,10 +1,13 @@
 package com.example.nguyen.chatamit.fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
+import android.view.SurfaceControl;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -14,6 +17,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,7 +39,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class ChatScreenFrag extends Fragment {
+public class ChatScreenFrag extends BaseFragment {
 
     private View rootView, viewBottom;
     private ImageView ivBack, ivSticker, ivSend;
@@ -54,6 +59,7 @@ public class ChatScreenFrag extends Fragment {
 
         return rootView;
     }
+
 
     private void setEvent() {
         ivBack.setOnClickListener(backToParent);
@@ -89,7 +95,7 @@ public class ChatScreenFrag extends Fragment {
                 isState = false;
             } else {
                 rvSticker.setVisibility(View.GONE);
-                isState = true;
+                isState = !isState;
             }
         }
     };
@@ -105,10 +111,7 @@ public class ChatScreenFrag extends Fragment {
             adapter.setClickListener(new StickerAdapter.ClickListener() {
                 @Override
                 public void clickItem(int position) {
-//                    Toast.makeText(getContext(), position+"", Toast.LENGTH_SHORT).show();
-
                     setContent(position);
-
                 }
             });
         }
@@ -116,24 +119,18 @@ public class ChatScreenFrag extends Fragment {
 
     private void setContent(int position) {
 
-        Sticker image = mStickers.get(position);
+        //This place is get data sticker image..
 
-        String[] path = image.getImage().split("\\.");
+        String[] nameSticker = mStickers.get(position).getImage().split("\\.");
+        String mPath = nameSticker[0];
 
-        String mPath = path[0];
-
-
-
-//not set data for messageList
+        int resIdImage = getContext().getResources()
+                .getIdentifier(mPath
+                        , "drawable", getContext().getPackageName());
 
         Message message = new Message();
-        message.setContent(mPath);
-
-        if(messageList.isEmpty())
-        {
-            messageList.add(message);
-        }
-
+        message.setmSticker(new Sticker(String.valueOf(resIdImage)));
+        messageList.add(message);
 
 
     }
@@ -155,16 +152,12 @@ public class ChatScreenFrag extends Fragment {
         edSend = viewBottom.findViewById(R.id.ed_send_screen);
         rvDisplayContentChat = rootView.findViewById(R.id.display_content_chat);
 
-        chatAdapter = new ChatAdapter(getContext(), messageList);
-        rvDisplayContentChat.setAdapter(chatAdapter);
-
 
         LinearLayoutManager mn = new LinearLayoutManager(getContext());
-        mn.setReverseLayout(true);
-
+        mn.setReverseLayout(false);
+        chatAdapter = new ChatAdapter(getContext(), messageList);
+        rvDisplayContentChat.setAdapter(chatAdapter);
         rvDisplayContentChat.setLayoutManager(mn);
-
-
 
         if (getActivity() instanceof MainActivity) {
             BottomNavigationView bottom = getActivity().findViewById(R.id.bottom_navigation_bar);
@@ -175,6 +168,7 @@ public class ChatScreenFrag extends Fragment {
         rvSticker.setVisibility(View.GONE);
 
         createDataSticker();
+
     }
 
     private void createDataSticker() {
@@ -184,17 +178,29 @@ public class ChatScreenFrag extends Fragment {
 
             for (String i : images) {
                 Sticker sticker = new Sticker(i);
-                mStickers.addAll(Collections.singleton(sticker));
+                mStickers.add(sticker);
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+
+        FragmentManager mn = getFragmentManager();
+
+        Fragment current = mn.getFragments().get(0);
+
+        if(mn.getBackStackEntryCount() > 0)
+        {
+            mn.popBackStack(current.getClass().getSimpleName(),0);
+
+        }else {
+            super.onBackPressed();
+        }
+
+    }
 }
-//    SpannableStringBuilder builder = new SpannableStringBuilder();
-//    builder.append("My string. I ")
-//            .append(" ", new ImageSpan(getActivity(), R.drawable.ic_action_heart), 0)
-//            .append(" Cree by Dexode");
-//
-//            textView.setText(builder);
+// warning try extend BasedFragment...and I have a issue of back press ChatScreenFragment.I'm not resolved
