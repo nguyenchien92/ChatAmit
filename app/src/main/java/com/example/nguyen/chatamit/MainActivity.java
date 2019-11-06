@@ -3,19 +3,23 @@ package com.example.nguyen.chatamit;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.nguyen.chatamit.fragments.ChatScreenFrag;
 import com.example.nguyen.chatamit.fragments.MainFrag;
 import com.example.nguyen.chatamit.fragments.MessageFragment;
 import com.example.nguyen.chatamit.util.NavigationTo;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 
 
 public class MainActivity extends AppCompatActivity {
@@ -34,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         navigationTo();
 
     }
-
 
 
     private void updateData() {
@@ -66,9 +69,24 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottom = fm.getFragments().get(0)
                 .getView().findViewById(R.id.bottom_navigation_bar);
 
+
         if (count > 0) {
-            childFm.popBackStack(childFm.getFragments().get(0).getTag(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            bottom.setVisibility(View.VISIBLE);
+
+            if (current instanceof ChatScreenFrag) {
+                View view = current.getView().findViewById(R.id.include_bottom);
+                RecyclerView rvStickerView = view.findViewById(R.id.rv_sticker_screen);
+
+                if (rvStickerView.getVisibility() == View.VISIBLE) {
+                    rvStickerView.setVisibility(View.GONE);
+                    childFm.popBackStack(current.getTag(), 0);
+                } else {
+                    childBackFragment(childFm, bottom);
+                }
+            } else {
+
+                childBackFragment(childFm, bottom);
+            }
+
         } else {
             if (!(current instanceof MessageFragment)) {
                 bottom.setSelectedItemId(R.id.action_message);
@@ -76,8 +94,13 @@ public class MainActivity extends AppCompatActivity {
                 showPopUp();
             }
         }
+    }
 
 
+    //This method is temporary... no idea instead :((
+    private void childBackFragment(FragmentManager fm, BottomNavigationView bottomNavigationView) {
+        fm.popBackStack(fm.getFragments().get(0).getTag(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        bottomNavigationView.setVisibility(View.VISIBLE);
     }
 
     private void showPopUp() {

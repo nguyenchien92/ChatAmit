@@ -39,7 +39,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class ChatScreenFrag extends BaseFragment {
+public class ChatScreenFrag extends Fragment {
 
     private View rootView, viewBottom;
     private ImageView ivBack, ivSticker, ivSend;
@@ -186,22 +186,6 @@ public class ChatScreenFrag extends BaseFragment {
         }
     }
 
-    @Override
-    public boolean onBackPressed() {
 
-        FragmentManager mn = getFragmentManager();
-
-        Fragment current = mn.getFragments().get(0);
-
-        if(mn.getBackStackEntryCount() > 0)
-        {
-            mn.popBackStack(current.getClass().getSimpleName(),0);
-            return true;
-
-        }else {
-            return false;
-        }
-
-    }
 }
 // warning try extend BasedFragment...and I have a issue of back press ChatScreenFragment.I'm not resolved
