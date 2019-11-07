@@ -51,6 +51,7 @@ public class ChatScreenFrag extends Fragment {
     private ChatAdapter chatAdapter;
     private List<Message> messageList = new ArrayList<>();
 
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.frag_chat_screen_layout, container, false);
 
@@ -132,13 +133,26 @@ public class ChatScreenFrag extends Fragment {
         message.setmSticker(new Sticker(String.valueOf(resIdImage)));
         messageList.add(message);
 
+        Toast.makeText(getContext(), mPath, Toast.LENGTH_SHORT).show();
 
+        chatAdapter.notifyDataSetChanged();
     }
 
     View.OnClickListener setSend = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            //set event send mess;
+            //not set event send mess yet....erroring;
+
+            String content = edSend.getText().toString();
+
+            Message messageContent = new Message();
+            messageContent.setContent(content);
+            messageList.add(messageContent);
+
+            chatAdapter.notifyDataSetChanged();
+
+
+
         }
     };
 
@@ -188,4 +202,3 @@ public class ChatScreenFrag extends Fragment {
 
 
 }
-// warning try extend BasedFragment...and I have a issue of back press ChatScreenFragment.I'm not resolved

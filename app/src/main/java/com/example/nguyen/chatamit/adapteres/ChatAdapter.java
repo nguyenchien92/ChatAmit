@@ -79,8 +79,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder> {
             Sticker mSticker = message.getmSticker();
             String resIdSticker = mSticker.getImage();
 
-            if (!resIdSticker.isEmpty()) {
+            if (!resIdSticker.isEmpty() && message.getContent() == null) {
                 ivUser.setImageResource(Integer.parseInt(resIdSticker));
+                tvUser.setText("");
+            }
+            if (message.getmSticker().getImage().isEmpty() && !message.getContent().isEmpty()) {
+                tvUser.setText(message.getContent());
+                ivUser.setVisibility(View.GONE);
             }
         }
     }

@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
                     childBackFragment(childFm, bottom);
                 }
             } else {
-
                 childBackFragment(childFm, bottom);
             }
 
@@ -134,4 +133,5 @@ public class MainActivity extends AppCompatActivity {
             myDialog.dismiss();
         }
     }
+
 }

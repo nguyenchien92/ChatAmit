@@ -19,7 +19,6 @@ import androidx.fragment.app.FragmentManager;
 import com.example.nguyen.chatamit.R;
 import com.example.nguyen.chatamit.util.NavigationTo;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import java.util.List;
 
 public class ContentFragment extends Fragment {
