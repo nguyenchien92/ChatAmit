@@ -37,7 +37,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChatScreenFrag extends Fragment {
 
@@ -48,7 +50,7 @@ public class ChatScreenFrag extends Fragment {
     private StickerAdapter adapter;
     private boolean isState = true;
     private EditText edSend;
-    private ChatAdapter chatAdapter;
+    private ChatAdapter chatAdapter,mAdapter;
     private List<Message> messageList = new ArrayList<>();
 
 
@@ -57,6 +59,10 @@ public class ChatScreenFrag extends Fragment {
 
         init();
         setEvent();
+
+
+
+
 
         return rootView;
     }
@@ -136,6 +142,7 @@ public class ChatScreenFrag extends Fragment {
         Toast.makeText(getContext(), mPath, Toast.LENGTH_SHORT).show();
 
         chatAdapter.notifyDataSetChanged();
+
     }
 
     View.OnClickListener setSend = new View.OnClickListener() {
@@ -147,12 +154,9 @@ public class ChatScreenFrag extends Fragment {
 
             Message messageContent = new Message();
             messageContent.setContent(content);
+
             messageList.add(messageContent);
-
             chatAdapter.notifyDataSetChanged();
-
-
-
         }
     };
 

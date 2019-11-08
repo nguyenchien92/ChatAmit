@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,11 +29,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder> {
         this.mMessages = mMessages;
     }
 
-    public List<Message> getmMessages() {
+    public List<Message> getData() {
         return mMessages;
     }
 
-    public void setmMessages(List<Message> m) {
+    public void setData(List<Message> m) {
         this.mMessages = m;
     }
 
@@ -49,7 +50,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder> {
     @Override
     public void onBindViewHolder(@NonNull ChatHolder holder, int position) {
 
-        holder.setView(position);
+        Message m = mMessages.get(position);
+
+
+        // not bind data....
+
+
     }
 
     @Override
@@ -73,20 +79,18 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder> {
             ivUser = itemView.findViewById(R.id.iv_user);
         }
 
-        public void setView(int position) {
-            Message message = mMessages.get(position);
+        public void setViewWithImage(Message message) {
 
             Sticker mSticker = message.getmSticker();
             String resIdSticker = mSticker.getImage();
 
-            if (!resIdSticker.isEmpty() && message.getContent() == null) {
-                ivUser.setImageResource(Integer.parseInt(resIdSticker));
-                tvUser.setText("");
-            }
-            if (message.getmSticker().getImage().isEmpty() && !message.getContent().isEmpty()) {
-                tvUser.setText(message.getContent());
-                ivUser.setVisibility(View.GONE);
-            }
+            ivUser.setImageResource(Integer.parseInt(resIdSticker));
+            tvUser.setVisibility(View.GONE);
+        }
+
+        public void setViewWithText(Message m) {
+            ivUser.setVisibility(View.GONE);
+            tvUser.setText(m.getContent());
         }
     }
 }
