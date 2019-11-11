@@ -50,8 +50,11 @@ public class ChatScreenFrag extends Fragment {
     private StickerAdapter adapter;
     private boolean isState = true;
     private EditText edSend;
-    private ChatAdapter chatAdapter,mAdapter;
-    private List<Message> messageList = new ArrayList<>();
+    private ChatAdapter chatAdapter;
+    private List<Message> messageImage = new ArrayList<>();
+    private List<Message> messageString = new ArrayList<>();
+
+    private Map<String,List<Message>> mDatas = new HashMap<>();
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,10 +62,6 @@ public class ChatScreenFrag extends Fragment {
 
         init();
         setEvent();
-
-
-
-
 
         return rootView;
     }
@@ -137,7 +136,11 @@ public class ChatScreenFrag extends Fragment {
 
         Message message = new Message();
         message.setmSticker(new Sticker(String.valueOf(resIdImage)));
-        messageList.add(message);
+        message.setContent(null);
+
+        messageImage.add(message);
+
+        mDatas.put(ChatAdapter.TYPE_DATA,messageImage);
 
         Toast.makeText(getContext(), mPath, Toast.LENGTH_SHORT).show();
 
@@ -154,9 +157,14 @@ public class ChatScreenFrag extends Fragment {
 
             Message messageContent = new Message();
             messageContent.setContent(content);
+            messageContent.setmSticker(null);
 
-            messageList.add(messageContent);
+            messageString.add(messageContent);
+
+            mDatas.put(ChatAdapter.TYPE_DATA,messageString);
+
             chatAdapter.notifyDataSetChanged();
+            edSend.setText("");
         }
     };
 
@@ -173,7 +181,9 @@ public class ChatScreenFrag extends Fragment {
 
         LinearLayoutManager mn = new LinearLayoutManager(getContext());
         mn.setReverseLayout(false);
-        chatAdapter = new ChatAdapter(getContext(), messageList);
+
+
+        chatAdapter = new ChatAdapter(getContext(), mDatas);
         rvDisplayContentChat.setAdapter(chatAdapter);
         rvDisplayContentChat.setLayoutManager(mn);
 

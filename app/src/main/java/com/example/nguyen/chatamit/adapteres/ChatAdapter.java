@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,23 +20,36 @@ import com.example.nguyen.chatamit.models.Message;
 import com.example.nguyen.chatamit.models.Sticker;
 
 import java.util.List;
+import java.util.Map;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder> {
     private Context context;
-    private List<Message> mMessages;
+    //    private List<Message> mMessages;
+    private Map<String, List<Message>> mapData;
+    public static final String TYPE_DATA = "type_data";
 
-    public ChatAdapter(Context context, List<Message> mMessages) {
+
+    public ChatAdapter(Context context, Map<String, List<Message>> mapData) {
         this.context = context;
-        this.mMessages = mMessages;
+        this.mapData = mapData;
     }
 
-    public List<Message> getData() {
-        return mMessages;
+    public void setData(Map<String, List<Message>> mapData) {
+        this.mapData = mapData;
     }
 
-    public void setData(List<Message> m) {
-        this.mMessages = m;
-    }
+//    public ChatAdapter(Context context, List<Message> mMessages) {
+//        this.context = context;
+//        this.mMessages = mMessages;
+//    }
+//
+//    public List<Message> getData() {
+//        return mMessages;
+//    }
+//
+//    public void setData(List<Message> m) {
+//        this.mMessages = m;
+//    }
 
     @NonNull
     @Override
@@ -50,17 +64,24 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder> {
     @Override
     public void onBindViewHolder(@NonNull ChatHolder holder, int position) {
 
-        Message m = mMessages.get(position);
+        List<Message> mList = mapData.get(TYPE_DATA);
 
-
-        // not bind data....
-
+        Message m = mList.get(position);
+        if (m.getContent() == null && m.getmSticker() != null) {
+            holder.setViewWithImage(mList.get(position));
+        } else {
+            holder.setViewWithText(mList.get(position));
+        }
 
     }
 
     @Override
     public int getItemCount() {
-        return mMessages.size();
+        if (mapData.isEmpty()) {
+            return mapData.size();
+        }
+
+        return mapData.get(TYPE_DATA).size();
     }
 
     public class ChatHolder extends RecyclerView.ViewHolder {
@@ -85,11 +106,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder> {
             String resIdSticker = mSticker.getImage();
 
             ivUser.setImageResource(Integer.parseInt(resIdSticker));
-            tvUser.setVisibility(View.GONE);
         }
 
         public void setViewWithText(Message m) {
-            ivUser.setVisibility(View.GONE);
             tvUser.setText(m.getContent());
         }
     }

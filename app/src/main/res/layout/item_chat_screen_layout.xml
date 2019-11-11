@@ -37,8 +37,7 @@
             android:layout_toRightOf="@id/tv_icon_mess"
             android:background="@drawable/mess_shape"
             android:backgroundTint="@color/colorGray"
-            android:gravity="center"
-            android:text="MXH, thậm chí nhiều lần tự hỏi người ta  gương mặt đơn giản chỉ là sản phẩm của PTTM và thêm nữa là sản phẩm của... photoshop." />
+            android:gravity="center" />
 
         <ImageView
             android:id="@+id/iv_another_user"
@@ -46,7 +45,6 @@
             android:layout_height="50dp"
             android:layout_below="@id/tv_other_user"
             android:layout_marginTop="0dp"
-            android:src="@drawable/cuppy_angry"
             android:layout_toRightOf="@id/tv_icon_mess"/>
     </RelativeLayout>
 
@@ -59,13 +57,11 @@
         android:backgroundTint="#6552E9"
         android:layout_marginBottom="5dp"
         android:gravity="center"
-        android:text="This is mess"
         android:textColor="#FFFFFF"
         android:layout_gravity="right"/>
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/cuppy_angry"
         android:layout_gravity="right"
         android:id="@+id/iv_user"/>
 </LinearLayout>
