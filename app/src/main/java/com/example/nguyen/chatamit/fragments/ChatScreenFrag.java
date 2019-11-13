@@ -51,10 +51,10 @@ public class ChatScreenFrag extends Fragment {
     private boolean isState = true;
     private EditText edSend;
     private ChatAdapter chatAdapter;
-    private List<Message> messageImage = new ArrayList<>();
-    private List<Message> messageString = new ArrayList<>();
+    private List<Message> messageList = new ArrayList<>();
 
-    private Map<String,List<Message>> mDatas = new HashMap<>();
+//    private List<Message> messageImageList = new ArrayList<>();
+//    private List<Message> messageStringList = new ArrayList<>();
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -134,17 +134,18 @@ public class ChatScreenFrag extends Fragment {
                 .getIdentifier(mPath
                         , "drawable", getContext().getPackageName());
 
-        Message message = new Message();
-        message.setmSticker(new Sticker(String.valueOf(resIdImage)));
-        message.setContent(null);
+        Message messageImage = new Message();
+        messageImage.setmSticker(new Sticker(String.valueOf(resIdImage)));
 
-        messageImage.add(message);
+        if(messageList.isEmpty())
+        {
+            messageList.add(0,messageImage);
+            chatAdapter.notifyDataSetChanged();
+        }else {
+            messageList.addAll(Collections.singleton(messageImage));
 
-        mDatas.put(ChatAdapter.TYPE_DATA,messageImage);
-
-        Toast.makeText(getContext(), mPath, Toast.LENGTH_SHORT).show();
-
-        chatAdapter.notifyDataSetChanged();
+            chatAdapter.notifyItemRangeInserted(chatAdapter.getItemCount(),messageList.size());
+        }
 
     }
 
@@ -157,14 +158,24 @@ public class ChatScreenFrag extends Fragment {
 
             Message messageContent = new Message();
             messageContent.setContent(content);
-            messageContent.setmSticker(null);
 
-            messageString.add(messageContent);
 
-            mDatas.put(ChatAdapter.TYPE_DATA,messageString);
 
-            chatAdapter.notifyDataSetChanged();
+//            data not fill
+
+            if(messageList.isEmpty())
+            {
+                messageList.add(0,messageContent);
+                chatAdapter.notifyDataSetChanged();
+            }else {
+                messageList.addAll(Collections.singleton(messageContent));
+
+                chatAdapter.notifyItemRangeInserted(chatAdapter.getItemCount(),messageList.size());
+            }
+
             edSend.setText("");
+
+
         }
     };
 
@@ -183,9 +194,11 @@ public class ChatScreenFrag extends Fragment {
         mn.setReverseLayout(false);
 
 
-        chatAdapter = new ChatAdapter(getContext(), mDatas);
+        chatAdapter = new ChatAdapter(getContext(), messageList);
+        chatAdapter.setHasStableIds(true);
         rvDisplayContentChat.setAdapter(chatAdapter);
         rvDisplayContentChat.setLayoutManager(mn);
+
 
         if (getActivity() instanceof MainActivity) {
             BottomNavigationView bottom = getActivity().findViewById(R.id.bottom_navigation_bar);

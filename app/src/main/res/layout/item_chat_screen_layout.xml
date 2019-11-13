@@ -45,7 +45,7 @@
             android:layout_height="50dp"
             android:layout_below="@id/tv_other_user"
             android:layout_marginTop="0dp"
-            android:layout_toRightOf="@id/tv_icon_mess"/>
+            android:layout_toRightOf="@id/tv_icon_mess" />
     </RelativeLayout>
 
     <TextView
