@@ -1,5 +1,6 @@
 package com.example.nguyen.chatamit.fragments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,13 +21,16 @@ import androidx.fragment.app.FragmentManager;
 import com.example.nguyen.chatamit.R;
 import com.example.nguyen.chatamit.util.NavigationTo;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.List;
 
-public class ContentFragment extends Fragment {
+public class ContentFragment extends BaseFragment {
 
     private View rootView;
     private BottomNavigationView bottom_navigation_bar;
     public FrameLayout frameDisplayContent;
+    private Dialog myDialog;
+    private TextView tvYes, tvNo;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,7 +58,7 @@ public class ContentFragment extends Fragment {
                         loadFragment(new ContactContainerFragment());
                         return true;
                     case R.id.action_more:
-                        loadFragment(new MoreFragment());
+                        loadFragment(new MoreContainerFragment());
                         return true;
                 }
 
@@ -62,7 +67,6 @@ public class ContentFragment extends Fragment {
         });
 
     }
-
 
 
     private void loadFragment(Fragment fragment) {
@@ -78,13 +82,66 @@ public class ContentFragment extends Fragment {
         menu.findItem(R.id.action_create_group).setVisible(false);
         menu.findItem(R.id.action_new_group_conversation).setVisible(false);
 
-        loadHomeFrag(getFragmentManager(),new MessContainerFragment());
+        myDialog = new Dialog(getContext());
+
+        loadHomeFrag(getFragmentManager(), new MessContainerFragment());
     }
 
-    private void loadHomeFrag(FragmentManager fm,Fragment fragment)
-    {
-        NavigationTo.navigationToRoot(fm,R.id.frame_display_content,fragment);
+    private void loadHomeFrag(FragmentManager fm, Fragment fragment) {
+        NavigationTo.navigationToVersionWithTag(fm, R.id.frame_display_content, fragment);
     }
 
+    @Override
+    public boolean onBackPressed() {
+        FragmentManager fm = getFragmentManager();
 
+        Fragment frag = fm.findFragmentById(R.id.frame_display_content);
+
+        FragmentManager childMn = frag.getChildFragmentManager();
+
+        int count = childMn.getBackStackEntryCount();
+
+        if(count > 0)
+        {
+            childMn.popBackStack();
+            bottom_navigation_bar.setVisibility(View.VISIBLE);
+
+            return true;
+        }else {
+            if(frag instanceof MessContainerFragment)
+            {
+                showPopUp();
+                return true;
+            }else {
+                bottom_navigation_bar.setSelectedItemId(R.id.action_message);
+
+                return true;
+            }
+        }
+
+    }
+
+    private void showPopUp() {
+        myDialog.setContentView(R.layout.custom_popup);
+        tvYes = myDialog.findViewById(R.id.tv_yes);
+        tvNo = myDialog.findViewById(R.id.tv_no);
+
+        myDialog.show();
+
+        tvNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                myDialog.dismiss();
+            }
+        });
+
+        tvYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                getActivity().finish();
+            }
+        });
+    }
 }

@@ -13,13 +13,13 @@ import static androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
 public class NavigationTo {
 
 
-    public static void navigationTo(FragmentManager fm, int frameLayout, Fragment fragment) {
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(frameLayout, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-
-    }
+//    public static void navigationTo(FragmentManager fm, int frameLayout, Fragment fragment) {
+//        FragmentTransaction transaction = fm.beginTransaction();
+//        transaction.replace(frameLayout, fragment);
+//        transaction.addToBackStack(null);
+//        transaction.commit();
+//
+//    }
 
     public static void navigationToRoot(FragmentManager fm, int frameLayout, Fragment fragment) {
         FragmentTransaction transaction = fm.beginTransaction();

@@ -36,7 +36,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactFragment extends Fragment {
+public class ContactFragment extends BaseFragment {
 
     private View rootView;
     private CustomAdapter adapter;

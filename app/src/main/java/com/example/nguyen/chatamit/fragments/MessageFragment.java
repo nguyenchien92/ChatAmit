@@ -34,7 +34,7 @@ import com.example.nguyen.chatamit.viewmodels.MessViewModel;
 
 import java.util.List;
 
-public class MessageFragment extends Fragment {
+public class MessageFragment extends BaseFragment {
 
     private CustomAdapter adapter;
     private View rootView;

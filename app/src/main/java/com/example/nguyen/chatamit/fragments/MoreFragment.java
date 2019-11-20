@@ -28,7 +28,7 @@ import java.util.List;
 
 import static com.example.nguyen.chatamit.adapteres.CustomAdapter.TYPE_MORE;
 
-public class MoreFragment extends Fragment {
+public class MoreFragment extends BaseFragment {
 
     private View rootView;
     private RecyclerView rvContentInfo, rvContentInfo2, rvContentInfo3;

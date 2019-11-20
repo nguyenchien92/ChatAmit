@@ -129,6 +129,14 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
 
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+
+
     @Override
     public int getItemCount() {
         return userList.size();

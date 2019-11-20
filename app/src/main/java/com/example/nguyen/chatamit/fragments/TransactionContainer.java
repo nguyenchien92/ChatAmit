@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.nguyen.chatamit.R;
 
-public class TransactionContainer extends Fragment {
+public class TransactionContainer extends BaseFragment {
 
     private View rootView;
 

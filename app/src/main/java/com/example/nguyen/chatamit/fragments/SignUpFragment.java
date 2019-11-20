@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.example.nguyen.chatamit.R;
 
 
-public class SignUpFragment extends Fragment {
+public class SignUpFragment extends BaseFragment {
 
     private View rootView;
     private TextView tvTitle, tvDescription;

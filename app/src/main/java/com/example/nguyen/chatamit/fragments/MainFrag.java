@@ -20,7 +20,7 @@ import com.synnapps.carouselview.ImageListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainFrag extends Fragment {
+public class MainFrag extends BaseFragment {
     private View rootView;
     private CarouselView carouselView;
     private List<Integer> mImages = new ArrayList<>();
@@ -93,7 +93,7 @@ public class MainFrag extends Fragment {
 //                .navigationTo(getActivity().getSupportFragmentManager()
 //                        , R.id.frame_layout_main, new SignInFragment());
 
-        NavigationTo.navigationToRoot(getFragmentManager(), R.id.frame_layout_main,
+        NavigationTo.navigationToVersionWithTag(getFragmentManager(), R.id.frame_layout_main,
                 new SignInFragment());
     }
 }

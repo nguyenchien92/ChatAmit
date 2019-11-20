@@ -15,11 +15,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nguyen.chatamit.fragments.BaseFragment;
 import com.example.nguyen.chatamit.fragments.ChatScreenFrag;
 import com.example.nguyen.chatamit.fragments.MainFrag;
 import com.example.nguyen.chatamit.fragments.MessageFragment;
+import com.example.nguyen.chatamit.fragments.SignUpFragment;
 import com.example.nguyen.chatamit.util.NavigationTo;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -39,12 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    private void updateData() {
-        Toast.makeText(this, "Data are updating", Toast.LENGTH_SHORT).show();
-    }
-
-
     private void navigationTo() {
         NavigationTo.navigationToRoot(getSupportFragmentManager(), R.id.frame_layout_main,
                 new MainFrag());
@@ -61,38 +59,23 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fm = getSupportFragmentManager();
 
-        FragmentManager childFm = fm.getFragments().get(1).getChildFragmentManager();
+        List<Fragment> current = fm.getFragments();
 
-        Fragment current = childFm.findFragmentById(R.id.frame_container);
+        boolean state = false;
 
-        int count = childFm.getBackStackEntryCount();
-        BottomNavigationView bottom = fm.getFragments().get(0)
-                .getView().findViewById(R.id.bottom_navigation_bar);
-
-
-        if (count > 0) {
-
-            if (current instanceof ChatScreenFrag) {
-                View view = current.getView().findViewById(R.id.include_bottom);
-                RecyclerView rvStickerView = view.findViewById(R.id.rv_sticker_screen);
-
-                if (rvStickerView.getVisibility() == View.VISIBLE) {
-                    rvStickerView.setVisibility(View.GONE);
-                    childFm.popBackStack(current.getTag(), 0);
-                } else {
-                    childBackFragment(childFm, bottom);
+        for (Fragment f : current) {
+            if (f != null && f instanceof BaseFragment) {
+                state = ((BaseFragment) f).onBackPressed();
+                if (state) {
+                    break;
                 }
-            } else {
-                childBackFragment(childFm, bottom);
-            }
-
-        } else {
-            if (!(current instanceof MessageFragment)) {
-                bottom.setSelectedItemId(R.id.action_message);
-            } else {
-                showPopUp();
             }
         }
+        if (!state) {
+            super.onBackPressed();
+        }
+
+
     }
 
 

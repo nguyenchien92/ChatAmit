@@ -17,7 +17,7 @@ import com.example.nguyen.chatamit.R;
 import com.example.nguyen.chatamit.util.NavigationTo;
 
 
-public class SignInFragment extends Fragment {
+public class SignInFragment extends BaseFragment {
 
     private View rootView;
     private TextView tvTitle, tvDescription;

@@ -16,7 +16,7 @@ import com.example.nguyen.chatamit.R;
 import com.example.nguyen.chatamit.util.NavigationTo;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class CreateNameGroupFrag extends Fragment {
+public class CreateNameGroupFrag extends BaseFragment {
     private View rootView;
     private ImageView ivBack, ivSuccess;
 

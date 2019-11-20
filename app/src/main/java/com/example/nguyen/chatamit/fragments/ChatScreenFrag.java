@@ -41,7 +41,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ChatScreenFrag extends Fragment {
+public class ChatScreenFrag extends BaseFragment
+{
 
     private View rootView, viewBottom;
     private ImageView ivBack, ivSticker, ivSend;

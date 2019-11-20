@@ -40,7 +40,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CreateChatGroupFrag extends Fragment {
+public class CreateChatGroupFrag extends BaseFragment {
 
     private View rootView;
     private RelativeLayout mSearchView, mEditSearchView;

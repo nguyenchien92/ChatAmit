@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.example.nguyen.chatamit.R;
 import com.example.nguyen.chatamit.util.NavigationTo;
 
-public class ContactContainerFragment extends Fragment {
+public class ContactContainerFragment extends BaseFragment {
     View rootView;
     private FrameLayout frameContainer;
 
