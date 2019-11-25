@@ -113,17 +113,16 @@ public class ContentFragment extends BaseFragment {
                 RecyclerView rvStick = view.findViewById(R.id.rv_sticker_screen);
 
 
-                if(rvStick.getVisibility() == View.VISIBLE)
-                {
+                if (rvStick.getVisibility() == View.VISIBLE) {
                     rvStick.setVisibility(View.GONE);
                     return true;
                 }
 
             }
-                childMn.popBackStack();
-                bottom_navigation_bar.setVisibility(View.VISIBLE);
+            childMn.popBackStack();
+            bottom_navigation_bar.setVisibility(View.VISIBLE);
 
-                return true;
+            return true;
         } else {
             if (frag instanceof MessContainerFragment) {
                 showPopUp();
@@ -161,36 +160,3 @@ public class ContentFragment extends BaseFragment {
         });
     }
 }
-//
-//        if (count > 0) {
-//
-//                if (current instanceof ChatScreenFrag) {
-//                View view = current.getView().findViewById(R.id.include_bottom);
-//                RecyclerView rvStickerView = view.findViewById(R.id.rv_sticker_screen);
-//
-//                if (rvStickerView.getVisibility() == View.VISIBLE) {
-//                rvStickerView.setVisibility(View.GONE);
-//                childFm.popBackStack(current.getTag(), 0);
-//                } else {
-//                childBackFragment(childFm, bottom);
-//                }
-//                } else {
-//
-//                childBackFragment(childFm, bottom);
-//                }
-//
-//                } else {
-//                if (!(current instanceof MessageFragment)) {
-//                bottom.setSelectedItemId(R.id.action_message);
-//                } else {
-//                showPopUp();
-//                }
-//                }
-//                }
-//
-//
-////This method is temporary... no idea instead :((
-//private void childBackFragment(FragmentManager fm, BottomNavigationView bottomNavigationView) {
-//        fm.popBackStack(fm.getFragments().get(0).getTag(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
-//        bottomNavigationView.setVisibility(View.VISIBLE);
-//        }

@@ -10,9 +10,14 @@ import android.view.PointerIcon;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.Adapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +47,7 @@ import java.util.List;
 
 public class CreateChatGroupFrag extends BaseFragment {
 
-    private View rootView;
+    private View rootView,rootChild;
     private RelativeLayout mSearchView, mEditSearchView;
     private EditText edSearch;
     private TextView tvClose;
@@ -51,6 +56,8 @@ public class CreateChatGroupFrag extends BaseFragment {
     private CustomAdapter adapter;
     private List<User> mUsers = new ArrayList<>();
     private boolean state = true;
+    private LinearLayoutManager manager = new LinearLayoutManager(getContext());
+    private RadioButton radioButton;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,12 +75,38 @@ public class CreateChatGroupFrag extends BaseFragment {
 
     private void setAdapter() {
 
-        adapter = new CustomAdapter(getContext(),mUsers,getFragmentManager());
+        adapter = new CustomAdapter(getContext(), mUsers, getFragmentManager());
 
         rvListContact.setAdapter(adapter);
-        rvListContact.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvListContact.setLayoutManager(manager);
 
-//        het y tuong
+        state = setClickEventItem(adapter);
+
+        if(state)
+        {
+            //het y tuong....
+        }
+
+    }
+
+    private boolean setClickEventItem(final CustomAdapter adapter) {
+        adapter.setClickItemListener(new CustomAdapter.ClickItemListener() {
+            @Override
+            public void clickItem(int position) {
+                Toast.makeText(getContext(), adapter.getUserList().get(position).getName(), Toast.LENGTH_SHORT).show();
+
+                User user = adapter.getUserList().get(position);
+
+                //how's get view item of rvListContact....?
+                View rootChild = rvListContact.getChildAt(position);
+
+                radioButton = rootChild.findViewById(R.id.radio_button);
+                radioButton.setChecked(true);
+
+            }
+        });
+
+        return true;
     }
 
     private void getData() {
@@ -120,8 +153,7 @@ public class CreateChatGroupFrag extends BaseFragment {
         @Override
         public void onClick(View view) {
             int id = view.getId();
-            switch (id)
-            {
+            switch (id) {
                 case R.id.relative_search_view:
                     mSearchView.setVisibility(View.GONE);
                     mEditSearchView.setVisibility(View.VISIBLE);

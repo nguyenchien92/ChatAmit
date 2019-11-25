@@ -44,6 +44,13 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private FragmentManager mn;
 
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
 
     public CustomAdapter(Context context, List<User> userList, FragmentManager mn) {
         this.mn = mn;
@@ -72,7 +79,7 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    private View getView(Context context, int layoutId, ViewGroup parent, boolean trueOrFalse) {
+    public View getView(Context context, int layoutId, ViewGroup parent, boolean trueOrFalse) {
         return LayoutInflater.from(context).inflate(layoutId, parent, trueOrFalse);
     }
 
@@ -107,7 +114,7 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     Fragment current = mn.findFragmentByTag(ContactFragment.class.getSimpleName());
 
                     if (!(current instanceof ContactFragment)) {
-                        ((ContactHolder) holder).stateRadioButton();
+//                        ((ContactHolder) holder).stateRadioButton();
                         ((ContactHolder) holder).radioButton.setVisibility(View.VISIBLE);
 
                     }
@@ -134,7 +141,6 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public long getItemId(int position) {
         return position;
     }
-
 
 
     @Override
@@ -282,22 +288,3 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 }
-
-//    Filter.FilterResults results = new Filter.FilterResults();
-//    final List<AnimalNames> namesList = originalData;
-//
-//    int count = namesList.size();
-//    final ArrayList<AnimalNames> mList = new ArrayList<>();
-//
-//    AnimalNames filterableString;
-//            for (int i = 0; i < count; i++) {
-//        filterableString = namesList.get(i);
-//        if (filterableString.getAnimalName().toLowerCase().contains(filterString)) {
-//        mList.add(filterableString);
-//        }
-//        }
-//
-//        results.values = mList;
-//        results.count = mList.size();
-//
-//        return results;
